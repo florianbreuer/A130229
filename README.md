@@ -10,19 +10,24 @@ no solutions in odd integers. Equivalently, let $K = \mathbb{Q}(\sqrt{p})$ with 
 Note that $2$ is inert in $K/\mathbb{Q}$, so there are three possible non-zero residue classes for $\varepsilon_p \bmod 2\mathcal{O}_K$. Heuristically, one thus expects about one third of all primes $p \equiv 5 \bmod 8$ to be members of this sequence.
 
 The present notebook contains code to test this heuristic. We define two counting functions for the sequence A130229. The naive counting function is
-$$\pi_1(x) = \sum_{p\in A130229, \; p\leq x} 1.$$
+
+$\pi_1(x) = \sum_{p\in A130229, \; p\leq x} 1.$
+
 For a better counting function, first define
-$$\chi(p) = \left\{ \begin{array}{ll} 
+
+$\chi(p) = \left\{ \begin{array}{ll} 
 1 & \text{if $p \equiv 5 \bmod 8$ and $\varepsilon_p \equiv 1 \bmod 2\mathcal{O}_K$} \\
 -\frac{1}{2} & \text{if $p \equiv 5 \bmod 8$ and $\varepsilon_p \not\equiv 1 \bmod 2\mathcal{O}_K$} \\
 0 & \text{if $p \not\equiv 5 \bmod 8$.}
 \end{array}
-\right.
-$$
+\right.$
+
 Now set 
-$$
+
+$
 \theta_\chi(x) := \sum_{p \leq x} \chi(p)\log p.
-$$
+$
+
 Our heuristc leads us to expect that $\theta_\chi(x) = o(x)$, i.e. that the terms mostly cancel out.
 
 The code computes the fundamental solution $(x_0, y_0) \bmod 2$ using the continued fraction method, with $B_i$ and $G_i$ reduced mod 2 at each step. The code computes this in parallel for many primes $p$ on a GPU. 
